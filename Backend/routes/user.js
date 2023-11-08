@@ -49,9 +49,10 @@ const updateAddress = async (req, res) => {
     const collection = client.db('UserDB').collection('userlist');
 
     // Update the user's address by their email
+    const update = { $set: { address: newAddress } };
     const result = await collection.updateOne(
       { email }, // Use the email to identify the user
-      { $set: { address: newAddress } } // Set the new address
+      update // Set the new address
     );
 
     if (result.modifiedCount === 1) {
@@ -274,9 +275,10 @@ const getFriendListWithNames = async (req, res) => {
         user.friends.push(friendEmail);
   
         // Update the document in the collection
+        const update = { $set: { friends: user.friends } };
         const updateResult = await collection.updateOne(
           { _id: user._id },
-          { $set: { friends: user.friends } }
+          update
         );
   
         if (updateResult.modifiedCount > 0) {
@@ -318,9 +320,10 @@ const getFriendListWithNames = async (req, res) => {
         user.friends.splice(friendIndex, 1);
   
         // Update the document in the collection
+        const update = { $set: { friends: user.friends } };
         const updateResult = await collection.updateOne(
           { _id: user._id },
-          { $set: { friends: user.friends } }
+          update
         );
   
         if (updateResult.modifiedCount > 0) {
@@ -374,9 +377,10 @@ const getFriendListWithNames = async (req, res) => {
         user.friendRequests.push(friendEmail);
   
         // Update the user's document in the collection
+        const update = { $set: { friendRequests: user.friendRequests } };
         const updateResult = await userCollection.updateOne(
           { _id: user._id },
-          { $set: { friendRequests: user.friendRequests } }
+          update
         );
   
         if (updateResult.modifiedCount > 0) {
@@ -428,9 +432,11 @@ const getFriendListWithNames = async (req, res) => {
       friend.friends.push(userEmail);
   
       // Update both user and friend documents
+      const updateFriendReq = { $set: { friendRequests: updatedFriendRequests, friends: user.friends } };
+      const updateFriends = { $set: { friends: friend.friends } };
       const updateResults = await Promise.all([
-        userCollection.updateOne({ _id: user._id }, { $set: { friendRequests: updatedFriendRequests, friends: user.friends } }),
-        userCollection.updateOne({ _id: friend._id }, { $set: { friends: friend.friends } }),
+        userCollection.updateOne({ _id: user._id }, updateFriendReq),
+        userCollection.updateOne({ _id: friend._id }, updateFriends),
       ]);
   
       if (updateResults.every(result => result.modifiedCount > 0)) {
@@ -467,9 +473,10 @@ const getFriendListWithNames = async (req, res) => {
       const updatedFriendRequests = user.friendRequests.filter(request => request !== friendEmail);
   
       // Update the user's document in the collection to remove the friend request
+      const friendReq = { $set: { friendRequests: updatedFriendRequests } };
       const updateResult = await userCollection.updateOne(
         { _id: user._id },
-        { $set: { friendRequests: updatedFriendRequests } }
+        friendReq
       );
   
       if (updateResult.modifiedCount > 0) {
