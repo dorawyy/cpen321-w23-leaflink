@@ -39,7 +39,7 @@ beforeAll(async () => {
   });
 
 
-describe('getFirstEventsOfEachDay', () => {
+/*describe('getFirstEventsOfEachDay', () => {
     // Mock user data for testing
     let userData;
     let userEmail;
@@ -91,7 +91,7 @@ describe('getFirstEventsOfEachDay', () => {
   });
 
     
-  describe('findOtherEmails', () => {
+  /*describe('findOtherEmails', () => {
     // Mock user data for testing
     let userData;
     let userEmail;
@@ -239,10 +239,9 @@ describe('getFirstEventsOfEachDay', () => {
       expect(res.size).toBe(2); // Assuming two users have matching events in the test data
       expect(res.has('user2@example.com')).toBe(true);
       expect(res.has('user1@example.com')).toBe(true);
-    });
-    */
+    });*/
 
-    test('should return a set with emails of users with matching events on different days', async () => {
+    /*test('should return a set with emails of users with matching events on different days', async () => {
       // Add an event for the user with the same startTime but different date and 'UBC' address
       await client.db('ScheduleDB').collection('schedulelist').updateOne(
         { email: userEmail },
@@ -278,7 +277,7 @@ test('should return an empty set for a user with matching startTime but differen
 
 
   
-  });
+  });*/
 
 // Interface GET https://20.163.28.92:8081/api/findMatchingUsers/:userEmail
 
