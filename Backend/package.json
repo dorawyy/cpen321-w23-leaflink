@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:backend": "jest Backend/test",
+    "test:backend": "jest Backend/test --coverage",
     "test:user": "jest Backend/test/user.test.js"
   }
 }
