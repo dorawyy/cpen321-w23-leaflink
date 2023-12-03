@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage --forceExit",
-    "test:backend": "jest Backend/test --forceExit",
+    "test:backend": "jest Backend/test --forceExit --coverage",
     "test:user": "jest Backend/test/user.test.js --forceExit",
     "test:user-coverage": "jest Backend/test/user.test.js --forceExit --coverage",
     "test:server-coverage": "jest Backend/test/server.test.js --forceExit --coverage",
